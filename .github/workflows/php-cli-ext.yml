@@ -115,7 +115,7 @@ jobs:
       - name: Build and push ${{ matrix.php-version }}-${{ matrix.php-ext }} to ghcr.io
         uses: docker/build-push-action@v2
         with:
-          pull: trues
+          pull: true
           push: true
           file: ext/Dockerfile
           build-args: |
