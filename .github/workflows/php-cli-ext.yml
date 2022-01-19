@@ -44,6 +44,7 @@ jobs:
           - lzf
           - mailparse
           - maxminddb
+          - mbstring
           - mcrypt
           - memcache
           - memcached
