@@ -34,4 +34,4 @@ jobs:
           push: true
           file: cli/base/Dockerfile
           build-args: PHP_VERSION=${{ matrix.php-version }}
-          tags: ghcr.io/peip-container/php/cli-base:${{ matrix.php-version }}
+          tags: ghcr.io/peip-container/php-cli/base:${{ matrix.php-version }}
