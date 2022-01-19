@@ -72,7 +72,6 @@ jobs:
           - snmp
           - snuffleupagus
           - soap
-          - sockets
           - solr
           - ssh2
           - swoole
