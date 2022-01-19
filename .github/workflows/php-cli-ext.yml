@@ -52,6 +52,7 @@ jobs:
           - msgpack
           - mysqli
           - odbc
+          - opcache
           - opencensus
           - openswoole
           - parallel
