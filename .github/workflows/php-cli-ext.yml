@@ -92,6 +92,7 @@ jobs:
           - yaml
           - yar
           - zephir_parser
+          - zip
           - zmq
           - zookeeper
     runs-on: ubuntu-latest
