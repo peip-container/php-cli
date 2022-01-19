@@ -1,0 +1,126 @@
+name: publish-php-ext-image
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+jobs:
+  push_to_registry:
+    name: PHP extensions docker image creation
+    strategy:
+      matrix:
+        php-version: ['7.4', '8.0', '8.1']
+        php-ext:
+          - amqp
+          - apcu
+          - ast
+          - bcmath
+          - bz2
+          - calendar
+          - csv
+          - dba
+          - decimal
+          - ds
+          - enchant
+          - ev
+          - event
+          - excimer
+          - exif
+          - ffi
+          - gd
+          - geospatial
+          - gettext
+          - gmagick
+          - gmp
+          - gnupg
+          - grpc
+          - http
+          - igbinary
+          - imagick
+          - imap
+          - inotify
+          - intl
+          - json_post
+          - ldap
+          - lzf
+          - mailparse
+          - maxminddb
+          - mcrypt
+          - memcache
+          - memcached
+          - mongodb
+          - msgpack
+          - mysqli
+          - odbc
+          - opencensus
+          - openswoole
+          - parallel
+          - pcntl
+          - pcov
+          - pdo_firebird
+          - pdo_mysql
+          - pdo_oci
+          - pdo_pgsql
+          - protobuf
+          - pspell
+          - rdkafka
+          - recode
+          - redis
+          - seaslog
+          - shmop
+          - snmp
+          - snuffleupagus
+          - soap
+          - sockets
+          - solr
+          - ssh2
+          - swoole
+          - sysvmsg
+          - sysvsem
+          - sysvshm
+          - tidy
+          - timezonedb
+          - uopz
+          - uploadprogress
+          - uuid
+          - vips
+          - xdebug
+          - xhprof
+          - xlswriter
+          - xmldiff
+          - yac
+          - yaml
+          - yar
+          - zephir_parser
+          - zmq
+          - zookeeper
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+
+      - name: check out the repo
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push ${{ matrix.php-version }}-${{ matrix.php-ext }} to ghcr.io
+        uses: docker/build-push-action@v2
+        with:
+          pull: true
+          push: true
+          file: cli/ext/Dockerfile
+          build-args: |
+            PHP_VERSION=${{ matrix.php-version }}
+            PHP_EXTENSION=${{ matrix.php-ext }}
+          tags: |
+            ghcr.io/peip-container/php/cli-ext:${{ matrix.php-version }}-${{ matrix.php-ext }}
+            ghcr.io/peip-container/php/cli-ext-${{ matrix.php-ext }}:${{ matrix.php-version }}
