@@ -32,6 +32,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          file: cli/base/Dockerfile
+          file: base/Dockerfile
           build-args: PHP_VERSION=${{ matrix.php-version }}
           tags: ghcr.io/peip-container/php-cli/base:${{ matrix.php-version }}

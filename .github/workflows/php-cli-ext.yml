@@ -117,7 +117,7 @@ jobs:
         with:
           pull: trues
           push: true
-          file: cli/ext/Dockerfile
+          file: ext/Dockerfile
           build-args: |
             PHP_VERSION=${{ matrix.php-version }}
             PHP_EXTENSION=${{ matrix.php-ext }}
