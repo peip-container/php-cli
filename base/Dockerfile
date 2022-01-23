@@ -1,5 +1,7 @@
 ARG PHP_VERSION=7.4
-FROM php:${PHP_VERSION}-cli-alpine
+ARG PHP_SAPI=cli
+ARG PHP_OS=alpine
+FROM php:${PHP_VERSION}-${PHP_SAPI}-${PHP_OS}
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
