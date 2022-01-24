@@ -8,7 +8,7 @@ jobs:
     name: Build PHP base images
     strategy:
       matrix:
-        php-version: ['7.4', '8.0.14', '8.1.1']
+        php-version: ['7.4.27', '8.0.14', '8.1.1']
         php-sapi: ['cli', 'fpm', 'apache']
     runs-on: ubuntu-latest
     permissions:
@@ -50,7 +50,7 @@ jobs:
     needs: build_and_push_base_images
     strategy:
       matrix:
-        php-version: ['7.4', '8.0', '8.1']
+        php-version: ['7.4.27', '8.0.14', '8.1.1']
         php-ext:
           - amqp
           - apcu
@@ -143,6 +143,11 @@ jobs:
       contents: read
     steps:
 
+      - name: Set environment variables
+        run: |
+          echo "PHP_VERSION=${{ matrix.php-version }}" >> $GITHUB_ENV
+          echo "PHP_MINOR_VERSION=$(echo "${{ matrix.php-version }}" | awk -F. '{print $1"."$2}')" >> $GITHUB_ENV
+
       - name: check out the repo
         uses: actions/checkout@v2
 
@@ -166,5 +171,8 @@ jobs:
             PHP_VERSION=${{ matrix.php-version }}
             PHP_EXTENSION=${{ matrix.php-ext }}
           tags: |
-            ghcr.io/peip-container/php-cli/ext:${{ matrix.php-version }}-${{ matrix.php-ext }}
-            ghcr.io/peip-container/php-cli/ext-${{ matrix.php-ext }}:${{ matrix.php-version }}
+            ghcr.io/${{ github.repository_owner }}/php-cli/ext:${{ env.PHP_VERSION }}-${{ matrix.php-ext }}
+            ghcr.io/${{ github.repository_owner }}/php-cli/ext-${{ matrix.php-ext }}:${{ env.PHP_VERSION }}
+            ghcr.io/${{ github.repository_owner }}/php-cli/ext:${{ env.PHP_MINOR_VERSION }}-${{ matrix.php-ext }}
+            ghcr.io/${{ github.repository_owner }}/php-cli/ext-${{ matrix.php-ext }}:${{ env.PHP_MINOR_VERSION }}
+
