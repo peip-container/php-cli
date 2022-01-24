@@ -8,7 +8,7 @@ jobs:
     name: Build PHP base images
     strategy:
       matrix:
-        php-version: ['7.4', '8.0.14', '8.1.2']
+        php-version: ['7.4', '8.0.14', '8.1.1']
         php-sapi: ['cli', 'fpm', 'apache']
     runs-on: ubuntu-latest
     permissions:
