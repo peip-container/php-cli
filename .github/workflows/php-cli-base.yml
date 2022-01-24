@@ -41,4 +41,5 @@ jobs:
 
   finish:
     name: Trigger extension builds
+    needs: build_and_push_images
     uses: peip-container/php-cli/.github/workflows/php-cli-ext.yml@main
