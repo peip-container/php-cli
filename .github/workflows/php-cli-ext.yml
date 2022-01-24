@@ -3,6 +3,7 @@ on:
   schedule:
     - cron: "0 0 * * 0"
   workflow_dispatch:
+  workflow_call:
 jobs:
   push_to_registry:
     name: PHP extensions docker image creation

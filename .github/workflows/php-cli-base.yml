@@ -41,11 +41,4 @@ jobs:
 
   finish:
     name: Trigger extension builds
-    runs-on: ubuntu-latest
-    needs: build_and_push_images
-    steps:
-      - name: Invoke extension build workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: publish-php-ext-image
-          token: ${{ secrets.GITHUB_TOKEN }}
+    uses: $GITHUB_REPOSITORY/.github/workflows/php-cli-ext.yml
