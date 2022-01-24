@@ -41,6 +41,7 @@ jobs:
 
   build_and_push_ext_images:
     name: Build PHP extension images
+    needs: build_and_push_base_images
     strategy:
       matrix:
         php-version: ['7.4', '8.0', '8.1']
