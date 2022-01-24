@@ -41,4 +41,4 @@ jobs:
 
   finish:
     name: Trigger extension builds
-    uses: ${{ github.repository}}/.github/workflows/php-cli-ext.yml@v1
+    uses: peip-container/php-cli/.github/workflows/php-cli-ext.yml@v1
