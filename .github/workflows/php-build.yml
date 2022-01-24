@@ -1,4 +1,4 @@
-name: publish-php-base-image
+name: publish-php-images
 on:
   schedule:
     - cron: "0 0 * * 0"
